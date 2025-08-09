@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels Near Guruvayoor Temple</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffffff;
+            --secondary: #1a1a1a;
+            --accent: #4a4a4a;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #757575;
+            --text: #333333;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --government-blue: #1a73e8;
+            --government-blue-light: #e8f0fe;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text);
+            line-height: 1.6;
+            min-width: 320px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: clamp(0.875rem, 3vw, 1rem);
+            color: var(--dark-gray);
+            font-weight: 400;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 0.5rem;
+        }
+        
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        @media (min-width: 640px) {
+            .controls {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 1.5rem;
+            }
+        }
+        
+        .sort-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+        }
+        
+        @media (min-width: 480px) {
+            .sort-options {
+                flex-direction: row;
+                align-items: center;
+                width: auto;
+            }
+        }
+        
+        .sort-label {
+            font-weight: 500;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+        
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--medium-gray);
+            background: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--secondary);
+            width: 100%;
+        }
+        
+        @media (min-width: 480px) {
+            .sort-select {
+                width: auto;
+            }
+        }
+        
+        .sort-select:hover {
+            border-color: var(--dark-gray);
+        }
+        
+        .sort-select:focus {
+            outline: none;
+            border-color: var(--dark-gray);
+        }
+        
+        .hotel-count {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            text-align: right;
+            width: 100%;
+        }
+        
+        @media (min-width: 640px) {
+            .hotel-count {
+                width: auto;
+                text-align: left;
+            }
+        }
+        
+        .hotel-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (min-width: 640px) {
+            .hotel-list {
+                gap: 1.5rem;
+            }
+        }
+        
+        .hotel-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            padding: 1.25rem;
+            border: 1px solid var(--medium-gray);
+        }
+        
+        @media (min-width: 640px) {
+            .hotel-card {
+                padding: 1.5rem;
+            }
+        }
+        
+        .hotel-card:hover {
+            box-shadow: var(--shadow-hover);
+            border-color: var(--dark-gray);
+        }
+        
+        .government-card {
+            border-left: 4px solid var(--government-blue);
+            background-color: var(--government-blue-light);
+        }
+        
+        .government-card .hotel-name {
+            color: var(--government-blue);
+        }
+        
+        .hotel-header {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .hotel-name {
+            font-size: clamp(1.1rem, 4vw, 1.3rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .hotel-price {
+            font-weight: 600;
+            color: var(--secondary);
+            margin: 0.5rem 0;
+            font-size: clamp(1rem, 3vw, 1.1rem);
+        }
+        
+        .hotel-address {
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .hotel-distance {
+            display: inline-block;
+            background-color: var(--light-gray);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: clamp(0.75rem, 3vw, 0.8rem);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+        
+        .hotel-address i, .hotel-distance i {
+            margin-right: 8px;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+        
+        .hotel-body {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+        
+        @media (min-width: 640px) {
+            .hotel-body {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+        }
+        
+        .amenities {
+            margin-bottom: 1rem;
+        }
+        
+        .amenities-title {
+            font-size: clamp(0.85rem, 3vw, 0.95rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        @media (min-width: 640px) {
+            .amenities-title {
+                margin-bottom: 0.8rem;
+            }
+        }
+        
+        .amenities-title i {
+            margin-right: 8px;
+            color: var(--dark-gray);
+        }
+        
+        .amenities-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .amenity {
+            background-color: var(--light-gray);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: clamp(0.75rem, 3vw, 0.8rem);
+            display: flex;
+            align-items: center;
+            transition: all 0.2s;
+            color: var(--dark-gray);
+        }
+        
+        .amenity i {
+            margin-right: 5px;
+            font-size: 0.7rem;
+            color: var(--dark-gray);
+        }
+        
+        .contact-info {
+            margin-top: 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+            color: var(--dark-gray);
+        }
+        
+        @media (min-width: 640px) {
+            .contact-item {
+                margin-bottom: 0.6rem;
+            }
+        }
+        
+        .contact-item i {
+            width: 20px;
+            color: var(--dark-gray);
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        
+        @media (min-width: 640px) {
+            .rating {
+                margin-top: 0.8rem;
+            }
+        }
+        
+        .rating-value {
+            background-color: var(--medium-gray);
+            color: var(--secondary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+        
+        .rating-source {
+            font-size: clamp(0.75rem, 3vw, 0.8rem);
+            color: var(--dark-gray);
+        }
+        
+        .website-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 1rem;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            background-color: var(--light-gray);
+            transition: all 0.2s;
+            border: 1px solid var(--medium-gray);
+        }
+        
+        .website-link:hover {
+            background-color: var(--medium-gray);
+            text-decoration: none;
+        }
+        
+        .website-link i {
+            margin-right: 6px;
+        }
+        
+        .no-price {
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+            color: var(--dark-gray);
+            font-style: italic;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid var(--medium-gray);
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .footer-text {
+            color: var(--dark-gray);
+            font-size: clamp(0.85rem, 3vw, 0.95rem);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (min-width: 480px) {
+            .footer-links {
+                gap: 1.5rem;
+            }
+        }
+        
+        .footer-link {
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+            white-space: nowrap;
+        }
+        
+        .footer-link:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            font-size: clamp(0.75rem, 3vw, 0.8rem);
+            color: var(--dark-gray);
+        }
+        
+        /* Special section for government dormitories */
+        .special-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: var(--government-blue);
+        }
+        
+        .section-subtitle {
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        @media (min-width: 640px) {
+            .pros-cons {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .pros, .cons {
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .pros {
+            background-color: #e6f4ea;
+            border-left: 4px solid #34a853;
+        }
+        
+        .cons {
+            background-color: #fce8e6;
+            border-left: 4px solid #d93025;
+        }
+        
+        .pros-cons-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pros .pros-cons-title {
+            color: #34a853;
+        }
+        
+        .cons .pros-cons-title {
+            color: #d93025;
+        }
+        
+        .pros-cons-title i {
+            margin-right: 8px;
+        }
+        
+        .pros-cons-list {
+            padding-left: 1.2rem;
+        }
+        
+        .pros-cons-list li {
+            margin-bottom: 0.3rem;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .comparison-table th {
+            background-color: var(--light-gray);
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .government-badge {
+            display: inline-block;
+            background-color: var(--government-blue);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Hotels Near Guruvayoor Temple</h1>
+            <p class="subtitle">Find your perfect accommodation close to the sacred Sri Krishna Temple</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Special Section for Government Dormitories -->
+        <div class="special-section">
+            <h2 class="section-title"><i class="fas fa-building"></i> Government-Supported Dormitories</h2>
+            <p class="section-subtitle">
+                These budget-friendly options are different from normal hotels — they are government or municipality-supported, 
+                run by Kudumbashree & Guruvayur Devaswom. Perfect for short stays or when you just need a safe place to rest near the temple.
+            </p>
+            
+            <div class="pros-cons">
+                <div class="pros">
+                    <div class="pros-cons-title"><i class="fas fa-check-circle"></i> Advantages</div>
+                    <ul class="pros-cons-list">
+                        <li>Very affordable (₹200-₹400 per 12 hours)</li>
+                        <li>Centrally located near temple entrances</li>
+                        <li>Clean and secure facilities</li>
+                        <li>Separate sections for men & women</li>
+                        <li>No advance booking required (walk-in)</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <div class="pros-cons-title"><i class="fas fa-exclamation-circle"></i> Limitations</div>
+                    <ul class="pros-cons-list">
+                        <li>Shared dormitory-style accommodation</li>
+                        <li>Basic amenities only (no luxury facilities)</li>
+                        <li>Charged per 12-hour blocks (not per night)</li>
+                        <li>No online booking - first-come, first-served</li>
+                        <li>May be crowded during peak seasons</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>Government Dormitories</th>
+                    <th>Normal Hotels</th>
+                </tr>
+                <tr>
+                    <td>Pricing</td>
+                    <td>Low, charged per bed / 12 hrs</td>
+                    <td>Higher, charged per room / night</td>
+                </tr>
+                <tr>
+                    <td>Room Type</td>
+                    <td>Shared dorms, individual beds</td>
+                    <td>Private rooms</td>
+                </tr>
+                <tr>
+                    <td>Purpose</td>
+                    <td>Affordable stay for pilgrims</td>
+                    <td>Comfort, amenities, tourism</td>
+                </tr>
+                <tr>
+                    <td>Operators</td>
+                    <td>Govt., Municipality, Kudumbashree</td>
+                    <td>Private owners</td>
+                </tr>
+                <tr>
+                    <td>Booking</td>
+                    <td>Walk-in or local enquiry</td>
+                    <td>Online & offline booking</td>
+                </tr>
+            </table>
+            
+            <div class="hotel-list" id="governmentDormitories">
+                <!-- Government dormitories will be inserted here -->
+            </div>
+        </div>
+        
+        <!-- Regular Hotels Section -->
+        <div class="controls">
+            <div class="sort-options">
+                <span class="sort-label">Sort by:</span>
+                <select id="sortSelect" class="sort-select">
+                    <option value="distance">Distance (Nearest First)</option>
+                    <option value="price-asc">Price (Low to High)</option>
+                    <option value="price-desc">Price (High to Low)</option>
+                    <option value="rating">Rating (Highest First)</option>
+                    <option value="name">Alphabetical (A-Z)</option>
+                </select>
+            </div>
+            <div class="hotel-count" id="hotelCount">12 hotels found</div>
+        </div>
+        
+        <div class="hotel-list" id="hotelList">
+            <!-- Hotels will be inserted here by JavaScript -->
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">Find your perfect stay near the sacred Guruvayoor Temple</p>
+            <div class="footer-links">
+                <a href="#" class="footer-link">About</a>
+                <a href="#" class="footer-link">Contact</a>
+                <a href="#" class="footer-link">Privacy</a>
+                <a href="#" class="footer-link">Terms</a>
+            </div>
+            <p class="copyright">© 2023 Guruvayoor Temple Hotels. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hotelData = {
+            "hotels": [
+                {
+                    "name": "Utsavam Hotel Apartments",
+                    "address": "Next to Govt. Ayurveda Hospital, Thrissur Main Road, East Nada, Guruvayur, Kerala, 680104",
+                    "phone": ["0487-2552700", "95266 33344"],
+                    "email": ["reservation@utsavamhotelapartment.com", "reservation@utsavamapartment.com"],
+                    "website": "https://www.utsavamhotelapartment.com/",
+                    "distance_from_temple": "0.6 km from temple",
+                    "distance_value": 0.6,
+                    "price_per_night": "₹2,836 (approx)",
+                    "price_value": 2836,
+                    "amenities": ["Restaurant", "Wi‑Fi", "24‑hour front desk", "Private parking", "Garden terrace", "Business center"],
+                    "rating": null,
+                    "room_types": ["AC Deluxe", "Non-AC standard"]
+                },
+                {
+                    "name": "Krishnavalsam Regency",
+                    "address": "XVIII/311, North Nada, Guruvayur PO, Thrissur, Kerala, 680101",
+                    "phone": null,
+                    "email": null,
+                    "website": null,
+                    "distance_from_temple": "160 m from temple",
+                    "distance_value": 0.16,
+                    "price_per_night": "₹2,195 (discounted)",
+                    "price_value": 2195,
+                    "amenities": ["Restaurant", "Vegetarian restaurant", "Free cancellation"],
+                    "rating": {
+                        "user_rating": 4.1,
+                        "source": "MakeMyTrip"
+                    },
+                    "room_types": null
+                },
+                {
+                    "name": "Sreepathi Mayoogha",
+                    "address": "13/607, 1-19, Edapully Road, West Nada, Guruvayur, Thrissur, Kerala, 680101",
+                    "phone": null,
+                    "email": null,
+                    "website": null,
+                    "distance_from_temple": "250 m from temple",
+                    "distance_value": 0.25,
+                    "price_per_night": "₹1,489 (discounted)",
+                    "price_value": 1489,
+                    "amenities": ["Rooftop swimming pool", "Reception", "Caretaker"],
+                    "rating": {
+                        "user_rating": 4.0,
+                        "source": "MakeMyTrip"
+                    },
+                    "room_types": ["1 Bedroom serviced apartment"]
+                },
+                {
+                    "name": "Nidhi Residency",
+                    "address": "East Nada, Guruvayur, Thrissur, Kerala, 680101",
+                    "phone": null,
+                    "email": null,
+                    "website": null,
+                    "distance_from_temple": "100 m from temple",
+                    "distance_value": 0.1,
+                    "price_per_night": "₹1,824 (discounted)",
+                    "price_value": 1824,
+                    "amenities": null,
+                    "rating": {
+                        "user_rating": 4.2,
+                        "source": "MakeMyTrip"
+                    },
+                    "room_types": null
+                },
+                {
+                    "name": "Sree Gokulam Sabari",
+                    "address": "North Outer Ring Road, East Nada, Guruvayur, Thrissur, Kerala, 680101",
+                    "phone": null,
+                    "email": null,
+                    "website": null,
+                    "distance_from_temple": "150 m from temple",
+                    "distance_value": 0.15,
+                    "price_per_night": null,
+                    "price_value": null,
+                    "amenities": ["Banquet", "Travel desk", "Restaurant"],
+                    "rating": null,
+                    "room_types": null
+                },
+                {
+                    "name": "Krishna Inn",
+                    "address": "Near Guruvayur railway station, Guruvayur, Thrissur, Kerala",
+                    "phone": null,
+                    "email": null,
+                    "website": null,
+                    "distance_from_temple": "700 m from temple",
+                    "distance_value": 0.7,
+                    "price_per_night": null,
+                    "price_value": null,
+                    "amenities": ["Vegetarian restaurant"],
+                    "rating": null,
+                    "room_types": null
+                },
+                {
+                    "name": "Mayura Residency",
+                    "address": "Guruvayur railway station area, Guruvayur, Thrissur, Kerala",
+                    "phone": null,
+                    "email": null,
+                    "website": null,
+                    "distance_from_temple": null,
+                    "distance_value": null,
+                    "price_per_night": null,
+                    "price_value": null,
+                    "amenities": ["Banqueting", "Dining", "Travel desk", "Parking"],
+                    "rating": null,
+                    "room_types": null
+                },
+                {
+                    "name": "Hare Krishna Inn",
+                    "address": "Near Guruvayur Railway Station, Guruvayur, Thrissur, Kerala",
+                    "phone": null,
+                    "email": null,
+                    "website": null,
+                    "distance_from_temple": "950 m from temple",
+                    "distance_value": 0.95,
+                    "price_per_night": null,
+                    "price_value": null,
+                    "amenities": null,
+                    "rating": null,
+                    "room_types": null
+                },
+                {
+                    "name": "Inn Temple Town",
+                    "address": "East Nada, Guruvayur, Thrissur, Kerala",
+                    "phone": null,
+                    "email": null,
+                    "website": null,
+                    "distance_from_temple": "400 m from temple",
+                    "distance_value": 0.4,
+                    "price_per_night": "₹2,800 (approx)",
+                    "price_value": 2800,
+                    "amenities": null,
+                    "rating": 9.0,
+                    "room_types": null
+                },
+                {
+                    "name": "Vishnu Inn",
+                    "address": "East Nada, Guruvayur, Thrissur, Kerala",
+                    "phone": null,
+                    "email": null,
+                    "website": null,
+                    "distance_from_temple": null,
+                    "distance_value": null,
+                    "price_per_night": null,
+                    "price_value": null,
+                    "amenities": ["Good services", "Hospitality praised"],
+                    "rating": 7.4,
+                    "room_types": null
+                },
+                {
+                    "name": "Shiva Inn",
+                    "address": "300 m from Guruvayur Temple, Guruvayur, Thrissur, Kerala",
+                    "phone": null,
+                    "email": null,
+                    "website": null,
+                    "distance_from_temple": "300 m from temple",
+                    "distance_value": 0.3,
+                    "price_per_night": "₹900 (approx)",
+                    "price_value": 900,
+                    "amenities": ["Bar", "Wi‑Fi", "Shuttle service"],
+                    "rating": 6.6,
+                    "room_types": null
+                },
+                {
+                    "name": "Hariprasadam",
+                    "address": "East Nada, Guruvayur, Thrissur, Kerala",
+                    "phone": null,
+                    "email": null,
+                    "website": null,
+                    "distance_from_temple": "200 m from temple",
+                    "distance_value": 0.2,
+                    "price_per_night": "₹1,400 (approx)",
+                    "price_value": 1400,
+                    "amenities": null,
+                    "rating": 5.6,
+                    "room_types": null
+                }
+            ]
+        };
+
+        const governmentDormitories = [
+            {
+                "name": "Devaswom Dormitory – South Nada",
+                "address": "Between Devaswom Hospital and Police Station, South Nada, Guruvayur",
+                "beds": 44,
+                "price": "₹300 per bed / 12 hours (inclusive of GST)",
+                "price_value": 300,
+                "distance_from_temple": "100 m from temple",
+                "distance_value": 0.1,
+                "amenities": ["Separate sections for men & women", "Parking", "Modern restrooms"],
+                "best_for": "Pilgrims wanting temple-side budget stay with security",
+                "type": "government"
+            },
+            {
+                "name": "Amenity Centre – West Nada",
+                "address": "West Nada, close to temple entrance, Guruvayur",
+                "beds": 32,
+                "price": "₹200 per bed / 12 hours",
+                "price_value": 200,
+                "distance_from_temple": "50 m from temple",
+                "distance_value": 0.05,
+                "amenities": ["Lockers", "Drinking water", "Basic bedding"],
+                "best_for": "Quick temple visits, solo travelers on tight budget",
+                "type": "government"
+            },
+            {
+                "name": "Facilitation Centre – East Nada",
+                "address": "East Nada, near Guruvayur bus stand, Guruvayur",
+                "beds": "Multiple AC & non-AC beds",
+                "price": "AC ₹400 / 12 hours, Non-AC ₹250 / 12 hours",
+                "price_value": 400,
+                "distance_from_temple": "150 m from temple",
+                "distance_value": 0.15,
+                "amenities": ["AC & Non-AC sections", "Reception", "Luggage storage"],
+                "best_for": "Travelers arriving by bus looking for same-day rest",
+                "type": "government"
+            },
+            {
+                "name": "She Stay Home / Panchajanyam Annex",
+                "address": "Managed within Kudumbashree lodging network in Guruvayur city area",
+                "beds": "Women-only dormitory",
+                "price": "₹200–₹300 per bed / 12 hours",
+                "price_value": 300,
+                "distance_from_temple": "300 m from temple",
+                "distance_value": 0.3,
+                "amenities": ["Safe women-only space", "Basic amenities", "Security staff"],
+                "best_for": "Female pilgrims or groups needing safe overnight stay",
+                "type": "government"
+            }
+        ];
+
+        // Function to get icon for amenity
+        function getAmenityIcon(amenity) {
+            const icons = {
+                "Restaurant": "utensils",
+                "Wi‑Fi": "wifi",
+                "24‑hour front desk": "clock",
+                "Private parking": "parking",
+                "Garden terrace": "tree",
+                "Business center": "briefcase",
+                "Vegetarian restaurant": "leaf",
+                "Free cancellation": "undo",
+                "Rooftop swimming pool": "swimming-pool",
+                "Reception": "desktop",
+                "Caretaker": "user-shield",
+                "Banquet": "glass-cheers",
+                "Travel desk": "map-marked-alt",
+                "Dining": "utensils",
+                "Parking": "parking",
+                "Bar": "glass-martini-alt",
+                "Shuttle service": "shuttle-van",
+                "Good services": "thumbs-up",
+                "Hospitality praised": "hands-helping",
+                "Separate sections for men & women": "venus-mars",
+                "Modern restrooms": "toilet",
+                "Lockers": "lock",
+                "Drinking water": "tint",
+                "Basic bedding": "bed",
+                "AC & Non-AC sections": "snowflake",
+                "Luggage storage": "suitcase",
+                "Safe women-only space": "female",
+                "Security staff": "shield-alt"
+            };
+            
+            for (const key in icons) {
+                if (amenity.includes(key)) {
+                    return icons[key];
+                }
+            }
+            return "check";
+        }
+
+        // Function to sort hotels
+        function sortHotels(hotels, sortBy) {
+            const sortedHotels = [...hotels];
+            
+            switch(sortBy) {
+                case 'distance':
+                    return sortedHotels.sort((a, b) => {
+                        if (a.distance_value === null) return 1;
+                        if (b.distance_value === null) return -1;
+                        return a.distance_value - b.distance_value;
+                    });
+                case 'price-asc':
+                    return sortedHotels.sort((a, b) => {
+                        if (a.price_value === null) return 1;
+                        if (b.price_value === null) return -1;
+                        return a.price_value - b.price_value;
+                    });
+                case 'price-desc':
+                    return sortedHotels.sort((a, b) => {
+                        if (a.price_value === null) return 1;
+                        if (b.price_value === null) return -1;
+                        return b.price_value - a.price_value;
+                    });
+                case 'rating':
+                    return sortedHotels.sort((a, b) => {
+                        const aRating = typeof a.rating === 'object' ? a.rating?.user_rating : a.rating;
+                        const bRating = typeof b.rating === 'object' ? b.rating?.user_rating : b.rating;
+                        
+                        if (aRating === null || aRating === undefined) return 1;
+                        if (bRating === null || bRating === undefined) return -1;
+                        
+                        // Convert to 5-point scale if needed
+                        const aVal = aRating > 5 && aRating <= 10 ? aRating / 2 : aRating;
+                        const bVal = bRating > 5 && bRating <= 10 ? bRating / 2 : bRating;
+                        
+                        return bVal - aVal;
+                    });
+                case 'name':
+                    return sortedHotels.sort((a, b) => a.name.localeCompare(b.name));
+                default:
+                    return sortedHotels;
+            }
+        }
+
+        // Function to render government dormitories
+        function renderGovernmentDormitories() {
+            const container = document.getElementById('governmentDormitories');
+            
+            governmentDormitories.forEach(dorm => {
+                const dormCard = document.createElement('div');
+                dormCard.className = 'hotel-card government-card';
+                
+                let html = `
+                    <div class="hotel-header">
+                        <h3 class="hotel-name">${dorm.name} <span class="government-badge">Govt. Supported</span></h3>
+                        <div class="hotel-distance">
+                            <i class="fas fa-walking"></i>
+                            ${dorm.distance_from_temple || 'Distance not available'}
+                        </div>
+                        <div class="hotel-address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${dorm.address}
+                        </div>
+                        <div class="hotel-price">${dorm.price}</div>
+                        ${dorm.beds ? `<div class="contact-item"><i class="fas fa-bed"></i> ${dorm.beds} beds available</div>` : ''}
+                        ${dorm.best_for ? `<div class="contact-item"><i class="fas fa-info-circle"></i> Best for: ${dorm.best_for}</div>` : ''}
+                    </div>
+                    <div class="hotel-body">
+                `;
+                
+                if (dorm.amenities && dorm.amenities.length > 0) {
+                    html += `
+                        <div class="amenities">
+                            <div class="amenities-title">
+                                <i class="fas fa-check-circle"></i>
+                                Facilities
+                            </div>
+                            <div class="amenities-list">
+                                ${dorm.amenities.map(amenity => `
+                                    <div class="amenity">
+                                        <i class="fas fa-${getAmenityIcon(amenity)}"></i>
+                                        ${amenity}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                html += `
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-info-circle"></i>
+                                Walk-in only (no advance booking)
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                Charged per 12-hour blocks
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-user-shield"></i>
+                                Managed by Guruvayur Devaswom/Kudumbashree
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                dormCard.innerHTML = html;
+                container.appendChild(dormCard);
+            });
+        }
+
+        // Function to render hotels
+        function renderHotels(sortBy = 'distance') {
+            const hotelList = document.getElementById('hotelList');
+            const sortedHotels = sortHotels(hotelData.hotels, sortBy);
+            
+            // Update hotel count
+            document.getElementById('hotelCount').textContent = `${sortedHotels.length} hotels found`;
+            
+            hotelList.innerHTML = '';
+            
+            sortedHotels.forEach(hotel => {
+                const hotelCard = document.createElement('div');
+                hotelCard.className = 'hotel-card';
+                
+                let html = `
+                    <div class="hotel-header">
+                        <h3 class="hotel-name">${hotel.name}</h3>
+                        <div class="hotel-distance">
+                            <i class="fas fa-walking"></i>
+                            ${hotel.distance_from_temple || 'Distance not available'}
+                        </div>
+                        <div class="hotel-address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${hotel.address}
+                        </div>
+                        ${hotel.price_per_night ? 
+                            `<div class="hotel-price">${hotel.price_per_night}</div>` : 
+                            `<div class="no-price">Price not available</div>`}
+                `;
+                
+                if (hotel.rating) {
+                    let ratingValue;
+                    let ratingSource;
+                    
+                    if (typeof hotel.rating === 'object') {
+                        ratingValue = hotel.rating.user_rating;
+                        ratingSource = hotel.rating.source;
+                    } else {
+                        ratingValue = hotel.rating;
+                        ratingSource = 'Guest rating';
+                    }
+                    
+                    // Convert to 5-point scale if needed
+                    const displayRating = ratingValue > 5 && ratingValue <= 10 ? (ratingValue / 2).toFixed(1) : ratingValue;
+                    
+                    html += `
+                        <div class="rating">
+                            <div class="rating-value">${displayRating}/10</div>
+                            <div class="rating-source">${ratingSource}</div>
+                        </div>
+                    `;
+                }
+                
+                html += `</div>`; // Close hotel-header
+                html += `<div class="hotel-body">`;
+                
+                if (hotel.amenities && hotel.amenities.length > 0) {
+                    html += `
+                        <div class="amenities">
+                            <div class="amenities-title">
+                                <i class="fas fa-check-circle"></i>
+                                Amenities
+                            </div>
+                            <div class="amenities-list">
+                                ${hotel.amenities.map(amenity => `
+                                    <div class="amenity">
+                                        <i class="fas fa-${getAmenityIcon(amenity)}"></i>
+                                        ${amenity}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                let contactInfoHtml = '';
+                if (hotel.phone || hotel.email) {
+                    contactInfoHtml += `<div class="contact-info">`;
+                    
+                    if (hotel.phone) {
+                        hotel.phone.forEach(phone => {
+                            contactInfoHtml += `
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    ${phone}
+                                </div>
+                            `;
+                        });
+                    }
+                    
+                    if (hotel.email) {
+                        hotel.email.forEach(email => {
+                            contactInfoHtml += `
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    ${email}
+                                </div>
+                            `;
+                        });
+                    }
+                    
+                    contactInfoHtml += `</div>`;
+                }
+                
+                if (hotel.website) {
+                    contactInfoHtml += `
+                        <a href="${hotel.website}" target="_blank" class="website-link">
+                            <i class="fas fa-external-link-alt"></i> Visit Website
+                        </a>
+                    `;
+                }
+                
+                html += contactInfoHtml;
+                html += `</div>`; // Close hotel-body
+                hotelCard.innerHTML = html;
+                hotelList.appendChild(hotelCard);
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGovernmentDormitories();
+            renderHotels();
+            
+            // Add event listener for sort select
+            document.getElementById('sortSelect').addEventListener('change', (e) => {
+                renderHotels(e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>
